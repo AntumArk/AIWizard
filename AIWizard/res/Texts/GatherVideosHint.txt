@@ -1,0 +1,4 @@
+•	Make or find videos containing your object, and some videos which don’t. Make sure those videos are as high quality as possible. We do not want to play “what can you see in this ink spot over 100 m away”. Same goes for the objects – make sure someone could easily recognize them without context. They should be fairly big (at least 50x50).
+•	Rename videos so they would not contain spaces and foreign symbols.
+•	It is wise to crop long videos to pieces containing your objects. You can use VLC media player recording button.
+•	You can also rip youtube videos with VLC. Just right click on video, copy video url, open network stream. Be aware that the quality will be far worse than from original source.

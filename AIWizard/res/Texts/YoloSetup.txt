@@ -1,0 +1,8 @@
+So you want to use Daknet neural network? 
+You are lucky! 
+There are some quite good instructions how to set up (and even use) written on https://github.com/AlexeyAB/darknet. 
+Go there and do some reading.                                                                               
+
+I can’t really help with this yet, as I only did this setup 1-2 times.
+
+Do you want to visit that website?

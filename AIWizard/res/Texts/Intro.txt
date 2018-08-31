@@ -1,0 +1,12 @@
+﻿
+Welcome to AI Wizard! by Linas Minkevičius
+
+This helper application is based on YoloGuide you can find in resources. 
+I suggest do some reading from links provided inside that document before 
+you start. 
+
+I ASSUME that you have already set up all of the required tools we made.
+
+You can always type in "help" for possible commands.
+
+Shall we start (yes/no)?
