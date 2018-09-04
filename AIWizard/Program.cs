@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
@@ -14,6 +15,12 @@ namespace AIWizard
         private static string buildFolderPath = "";
         private static string databaseWorkspaceFolderPath = "";
         private static string darknetFolderPath = "";
+        private static string dbName = "";
+
+        /// <summary>
+        /// The list to hold past used databases
+        /// </summary>
+        private static string projects = "";
 
         private static void Main()
         {
@@ -23,50 +30,72 @@ namespace AIWizard
             FancyWriter.WriteSlow(strings.Intro);
             if (FancyReader.AwaitConfirmation())
             {
-                FancyWriter.WriteSlow("Loading configurations...");
-                // You can new up an instance
-                //Load path
-                if (File.Exists("bfp.txt"))
-                {
-                    buildFolderPath = File.ReadAllText("bfp.txt");
-                    Console.WriteLine("Your tools build path: " + buildFolderPath);
-                }
-                else
-                {
-                    buildFolderPath = FancyReader.AwaitDirectory(strings.BuildFolderPrompt);
-                    File.WriteAllText("bfp.txt", buildFolderPath);
-                    FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("bfp.txt") +
-                                          " as your build folder");
-                }
-
-                if (File.Exists("dbw.txt"))
-                {
-                    databaseWorkspaceFolderPath = File.ReadAllText("dbw.txt");
-                    Console.WriteLine("Your database workspace path: " + databaseWorkspaceFolderPath);
-                }
-                else
-                {
-                    databaseWorkspaceFolderPath = FancyReader.AwaitDirectory(strings.DBWorkspacePrompt);
-                    File.WriteAllText("dbw.txt", databaseWorkspaceFolderPath);
-                    FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("dbw.txt") +
-                                          " as your  database workspace folder");
-                }
-
-                if (File.Exists("drk.txt"))
-                {
-                    darknetFolderPath = File.ReadAllText("drk.txt");
-                    Console.WriteLine("Your darknet build path: " + darknetFolderPath);
-                }
-                else
-                {
-                    darknetFolderPath = FancyReader.AwaitDirectory(strings.DarknetPathPrompt);
-                    File.WriteAllText("drk.txt", darknetFolderPath);
-                    FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("drk.txt") +
-                                          " as your darknet build folder");
-                }
                 while (!Run())
                 {
                 }
+            }
+        }
+
+        /// <summary>
+        /// Initializes first database.
+        /// </summary>
+        private static void Init()
+        {
+            FancyWriter.WriteSlow("Loading configurations...");
+            // You can new up an instance
+            //Load path
+            if (File.Exists("bfp.txt"))
+            {
+                buildFolderPath = File.ReadAllText("bfp.txt");
+                Console.WriteLine("Your tools build path: " + buildFolderPath);
+            }
+            else
+            {
+                buildFolderPath = FancyReader.AwaitDirectory(strings.BuildFolderPrompt);
+                File.WriteAllText("bfp.txt", buildFolderPath);
+                FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("bfp.txt") +
+                                      " as your build folder");
+            }
+            if (File.Exists("drk.txt"))
+            {
+                darknetFolderPath = File.ReadAllText("drk.txt");
+                Console.WriteLine("Your darknet build path: " + darknetFolderPath);
+            }
+            else
+            {
+                darknetFolderPath = FancyReader.AwaitDirectory(strings.DarknetPathPrompt);
+                File.WriteAllText("drk.txt", darknetFolderPath);
+                FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("drk.txt") +
+                                      " as your darknet build folder");
+            }
+
+            if (File.Exists(Files.Projects))
+            {   //It is not a first run. Request if you want to open different project.
+                var projec = File.ReadAllLines(Files.Projects);
+                FancyWriter.WriteSlow("Please select database you would like to edit");
+                for (int i = 0; i < projec.Length; i++)
+                {
+                    FancyWriter.WriteSlow("[" + i + "]" + " " + projec[i]);
+                }
+
+                databaseWorkspaceFolderPath = File.ReadAllText("dbw.txt");
+                Console.WriteLine("Your database workspace path: " + databaseWorkspaceFolderPath);
+            }
+            else
+            {   //Thhis is the first run, lets request for a place and name of new database and add it to the project list.
+                //Create projects file
+                File.Create(Files.Projects);
+
+                //Request for path for newe database
+                databaseWorkspaceFolderPath = FancyReader.AwaitDirectory(strings.DBWorkspacePrompt);
+                //Request name for new database
+                dbName = FancyReader.AwaitAnswer(strings.DBNamePrompt);
+                //Combine both
+                databaseWorkspaceFolderPath = Path.Combine(databaseWorkspaceFolderPath, dbName);
+                //Append new database to project list
+                File.AppendAllText(Files.Projects, databaseWorkspaceFolderPath + '\n');
+                FancyWriter.WriteSlow("You have selected :" + File.ReadAllText("dbw.txt") +
+                                      " as your  database workspace folder");
             }
         }
 
@@ -640,6 +669,51 @@ namespace AIWizard
                 Directory.GetDirectories(currentDir).ToList().ForEach(c => CopyDir(c, backupDir));
                 FancyWriter.WriteSlow("Backup finished");
             }
+        }
+
+        private static void AddObjects()
+        {
+            Redo:
+            FancyWriter.WriteSlow("Please enter objects you are planning to track. Type 'finished' if you are done.");
+
+            var input = FancyReader.AwaitAnswer();
+            List<string> oobjList = new List<string>();
+            while (input != "finished")
+            {
+                oobjList.Add(input);
+                input = FancyReader.AwaitAnswer();
+            }
+
+            if (oobjList.Count <= 0)
+            {
+                FancyWriter.WriteSlow("Your list is empty! We can't have that. Try again with at least one object.");
+                goto Redo;
+            }
+
+            for (int i = 0; i < oobjList.Count; i++)
+            {
+                FancyWriter.WriteSlow("[" + i + "]" + " " + oobjList[i]);
+            }
+            if (!FancyReader.AwaitConfirmation("Is the list looking correct?"))
+            {
+                FancyWriter.WriteSlow("You will try again");
+                goto Redo;
+            }
+            FancyWriter.WriteSlow("Appending to obj.names file");
+            Directory.SetCurrentDirectory(Path.Combine(databaseWorkspaceFolderPath, "Database", Branches.CurrentConfigs));
+            File.AppendAllLines(Files.Classes, oobjList);
+            var newList = File.ReadAllLines(Files.Classes).ToList();
+            FancyWriter.WriteSlow("This is your new object list. Count: " + newList.Count);
+            for (int i = 0; i < newList.Count; i++)
+            {
+                FancyWriter.WriteSlow("[" + i + "]" + " " + newList[i]);
+            }
+
+            var objdata = File.ReadAllLines(Files.ClassData).ToList();
+            objdata[0] = "classes = " + newList.Count;
+            File.WriteAllLines(Files.ClassData, objdata);
+            FancyWriter.WriteSlow("Please inspect obj files");
+            OpenFolder(Directory.GetCurrentDirectory());
         }
     }
 }

@@ -117,41 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BuildFolderPrompt" xml:space="preserve">
-    <value>Your selected build folder (one which contains all of the tools) is invalid. Please enter valid path.</value>
+  <data name="CurrentConfigs" xml:space="preserve">
+    <value>Current/Configs</value>
   </data>
-  <data name="DarkNetGitSite" xml:space="preserve">
-    <value>https://github.com/AlexeyAB/darknet</value>
+  <data name="CurrentData" xml:space="preserve">
+    <value>Current/logoData</value>
   </data>
-  <data name="DarknetPathPrompt" xml:space="preserve">
-    <value>Please enter path to where your darknet.exe is located. This folder is called "root" in our guide.</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DBFolderTree" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\DBFolderTree.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="DBPrep" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\DBPrep.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="DBWorkspacePrompt" xml:space="preserve">
-    <value>Please enter path to folder, where you will be storing backups and changes of your database.</value>
-  </data>
-  <data name="FirstPrompt" xml:space="preserve">
-    <value>What do you want to do? </value>
-  </data>
-  <data name="GatherVideosHint" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\GatherVideosHint.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="Intro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\Intro.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="TrainingPrepFlows" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\TrainingPrepFlows.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="YoloSetup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Texts\YoloSetup.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="DBNamePrompt" xml:space="preserve">
-    <value>Please enter the name of your database.</value>
+  <data name="CurrentWeights" xml:space="preserve">
+    <value>Current/weights</value>
   </data>
 </root>

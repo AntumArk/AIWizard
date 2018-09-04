@@ -107,6 +107,15 @@ namespace AIWizard.res {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the name of your database..
+        /// </summary>
+        public static string DBNamePrompt {
+            get {
+                return ResourceManager.GetString("DBNamePrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Preparing the database is essential. If I tell you to give me some runite ore and a bottle of aggression potion, what would you do? Most likely shrug your shoulders because you have no clue what they are. But if I told you that it was from a certain game, you could answer me that you don’t play it or do not have those items. It shows that with some information from the past, you can give me some defined answer. Same goes for the neural networks as they are based on how human nerves work. If you show it enou [rest of string was truncated]&quot;;.
         /// </summary>
         public static string DBPrep {

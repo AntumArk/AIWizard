@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Authors>Linas Minkevičius</Authors>
+    <Company>ZoomTV (UAB TV Partneriai)</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="res\Branches.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Branches.resx</DependentUpon>
+    </Compile>
+    <Compile Update="res\Files.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Files.resx</DependentUpon>
+    </Compile>
     <Compile Update="res\strings.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -35,6 +47,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="res\Branches.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Branches.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="res\Files.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Files.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="res\strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>

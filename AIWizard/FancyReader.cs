@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace AIWizard
@@ -254,6 +256,31 @@ namespace AIWizard
                 Console.ReadKey(true);
             var answer = Console.ReadLine();
             return answer;
+        }
+
+        public static int AwaitAnswer(string[] answers)
+        {
+            while (Console.KeyAvailable)
+                Console.ReadKey(true);
+            var answer = Console.ReadLine();
+            while (!answers.Contains(answer))
+            {
+                FancyWriter.WriteSlow("I did not get that.");
+            }
+            return answers.ToList().FindIndex(c => c == answer);
+        }
+
+        public static int AwaitAnswer(string prompt, string[] answers)
+        {
+            while (Console.KeyAvailable)
+                Console.ReadKey(true);
+            FancyWriter.WriteSlow(prompt);
+            var answer = Console.ReadLine();
+            while (!answers.Contains(answer))
+            {
+                FancyWriter.WriteSlow("I did not get that.");
+            }
+            return answers.ToList().FindIndex(c => c == answer);
         }
 
         public static string AwaitDirectory(string prompt)
